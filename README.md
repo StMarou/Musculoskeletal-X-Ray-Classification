@@ -24,7 +24,7 @@ is manually labeled by radiologists as either normal or abnormal.
 The dataset contains X-Rays from seven different body parts: 
 wrists, forearms, humeri, hands, shoulders, elbows and fingers
 
-[Training Instances](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/training_instances.png)
+![Training Instances](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/training_instances.png)
 
 ## Preprocessing
 First, since the shape of the X-Rays was variable, all the X-Rays were 
@@ -75,7 +75,7 @@ information has a better flow among all layers of the network, and
 secondly, it requires fewer parameters than the traditional CNN 
 architectures, as it does not learn redundant feature maps.
 
-[DenseNet architecture](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/densenet.png)
+![DenseNet architecture](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/densenet.png)
 
 For our problem, a pre-trained (on `ImageNet`) DenseNet169 model 
 was fine-tuned. The top of the model was removed, and a global 
@@ -120,7 +120,7 @@ X-Rays of hands, followed by X-Rays of shoulders and fingers had
 the three lowest (under 0.5) cohen kappa scores (among the 
 DenseNet169’s prediction). 
 
-[Kappas](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/kappas_bodyparts.png)
+![Kappas](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/kappas_bodyparts.png)
 
 ## Attempt to improve results: Ensemble
 Since the resources were limited, only the three poorest performing 
@@ -154,7 +154,7 @@ sizes were reduced while expanding the filter banks. For example,
 a dxd grid with k filters, after the reduction would become a 
 d/2xd/2 grid with 2k filters.
 
-[InceptionV3 architecture](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/inceptionv3.png)
+![InceptionV3 architecture](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/inceptionv3.png)
 
 For our problem, in order to improve the predictions of the three 
 poorest performing body parts, the features produced by both 
@@ -180,7 +180,7 @@ dropout layer with a rate of 0.3. Then, a global average pooling
 layer created 512 features from each model, which were then 
 concatenated and fed to the output layer. 
 
-[Ensemble architecture](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/ensemble.png)
+![Ensemble architecture](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/ensemble.png)
 
 The cohen kappa scores increased for all three body parts, 
 with the largest increase observed in shoulder X-Rays (11%). 
