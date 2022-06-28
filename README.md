@@ -9,7 +9,7 @@ and tested using the whole dataset, and then a third more complex
 architecture was created using only the body parts that produced 
 the lower scores, in an effort to improve their predictions. 
 In particular, a CNN was trained from scratch and a pre-trained 
-DenseNet169 model was fine-tuned with the whole dataset, whereas 
+DenseNet169 was fine-tuned with the whole dataset, whereas 
 an ensemble of a pre-trained DenseNet169 and a pre-trained 
 InceptionV3 was fine-tuned using only the poor-performance body 
 parts. The Cohen Kappa score was used as the main metric (as
@@ -27,10 +27,10 @@ wrists, forearms, humeri, hands, shoulders, elbows and fingers
 ![Training Instances](https://github.com/StMarou/Musculoskeletal-X-Ray-Classification/blob/master/static/training_instances.png?style=centerme)
 
 ## Preprocessing
-First, since the shape of the X-Rays was variable, all the X-Rays were 
+First, since the dimensions of the X-Rays were variable, they were 
 resized to have the same shape (224x224x3 for the CNN and 
 DenseNet169 models and 299x299x3 for the InceptionV3 model). Then,
-the pixel values were divided by 255 to convert them to range from 0 
+the pixel values were divided by 255 to convert them to a range from 0 
 to 1. A validation set (15% of the original training set) was used 
 to decide when the training will be terminated. Data augmentation 
 was also applied to (only) the training set, by randomly flipping 
@@ -38,7 +38,7 @@ the images horizontally and rotating them up to 30 degrees. Since
 the whole dataset could not fit in memory, `keras`’ 
 `ImageDataGenerator` was used to apply these transformations. Also,
 due to resource limitations, `ImageDataGenerator` proved to be 
-extremely useful, since instead of creating new images which would 
+extremely useful, since instead of creating new images, which would 
 slow down the training process, it uses random transformations of 
 the original X-Rays in each epoch, while keeping the number of 
 training instances the same.
@@ -175,7 +175,7 @@ could ‘cooperate’ to improve the results.
 
 However, given that a little more than half of the training 
 instances were used for training and the complexity of the 
-resulting model was almost three times bigger DenseNet169’s, the 
+resulting model was almost three times bigger than DenseNet169’s, the 
 model was prone to overfitting. To combat with this problem, the 
 dimension of the final layer before the output layer was reduced, 
 and dropout was applied. In particular, a 1x1 convolutional layer 
@@ -188,7 +188,7 @@ concatenated and fed to the output layer.
 
 The cohen kappa scores increased for all three body parts, 
 with the largest increase observed in shoulder X-Rays (11%). 
-Furthermore, the scores of the rest of the metrics were also 
+Furthermore, the scores of the rest of the metrics also 
 improved (with some exceptions), which means that the ensemble 
 architecture could make better predictions with only a little more 
 than half of the data.
